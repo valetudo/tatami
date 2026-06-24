@@ -237,6 +237,24 @@ function mostraNodo(n){
     b += '</div>';
   }
 
+  // contesto ricavato dal grafo: da dove ci si arriva / dove porta (auto-loop esclusi)
+  const entranti = DATI.links.filter((l) => idDi(l.target) === n.id && idDi(l.source) !== n.id);
+  const uscenti  = DATI.links.filter((l) => idDi(l.source) === n.id && idDi(l.target) !== n.id);
+  const nomeNodo = (id) => (NODI_BY_ID[id] ? NODI_BY_ID[id].nome : id);
+  if (entranti.length){
+    b += `<div class="p-sez">Ci si arriva da</div>`;
+    entranti.forEach((l) => {
+      b += `<div class="rel">◂ <b>${esc(nomeNodo(idDi(l.source)))}</b><span class="muted2"> — ${esc(l.mossa || '')}</span></div>`;
+    });
+  }
+  if (uscenti.length){
+    b += `<div class="p-sez">Porta a</div>`;
+    uscenti.forEach((l) => {
+      const extra = l.esito_negativo ? ' ⚠' : (l.conquista ? ' 🔑' : '');
+      b += `<div class="rel">▸ <b>${esc(nomeNodo(idDi(l.target)))}</b>${extra}<span class="muted2"> — ${esc(l.mossa || '')}</span></div>`;
+    });
+  }
+
   if (n.conquiste_possibili && n.conquiste_possibili.length){
     b += `<div class="p-sez">Conquiste possibili qui</div><div class="chips">`
        + n.conquiste_possibili.map((c) => `<span class="chip">🔑 ${esc(c)}</span>`).join('') + '</div>';

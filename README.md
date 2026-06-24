@@ -84,6 +84,11 @@ transizioni:
 - **Esiti negativi & svantaggi**: "finire male" è un **arco** (`esito_negativo`), non un
   nodo; ti deposita in un **nodo di svantaggio** (`svantaggio: true`), vivo, da cui parte il
   gioco difensivo. Marchiamo l'evento (arco), non il luogo (nodo).
+- **Nomi puliti (identità ≠ contesto)**: una posizione si chiama col suo nome **canonico**
+  («Lasso guard», non «Lasso anti-HQ»). Il *perché / da dove* vive negli **archi** e nella
+  scheda, non nel nome: la stessa posizione è raggiungibile da più punti ed è spesso giocabile
+  anche in prima battuta. La scheda del nodo mostra in automatico **«ci si arriva da / porta a»**
+  ricavandolo dai collegamenti.
 
 ## Validazione (cosa controlla `build.py`)
 

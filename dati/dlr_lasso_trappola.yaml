@@ -28,14 +28,19 @@ posizioni:
       di passaggio (bivio knee slide / smash pass; il suo braccio destro tiene il mio bavero).
 
   - id: lasso_guard
-    nome: Lasso guard (anti-HQ)
+    nome: Lasso guard
     ruolo: sotto
-    note: La mia gamba sinistra avvolge il suo braccio destro. Chiude il bivio.
+    note: >
+      La mia gamba sinistra avvolge il suo braccio destro. Si puo' montare anche in prima
+      battuta: non e' "anti-HQ" per natura. Contrasta l'headquarters solo quando ci si
+      arriva da li' (in quel caso chiude il bivio knee slide / smash).
 
   - id: side_control_regalato
-    nome: Controllo laterale regalato (trappola)
+    nome: Controllo laterale
     ruolo: sotto
-    note: Concedo il passaggio dal lato opposto al lasso; il lasso resta armato.
+    note: >
+      Posizione di controllo laterale. Qui ci arrivo concedendolo come trappola: apro il
+      lato opposto al lasso, che resta armato (il "regalato/trappola" sta nell'arco in entrata).
 
   - id: inversione
     nome: Inversione avvenuta (+2)
@@ -45,7 +50,7 @@ posizioni:
       (sotto->sopra). Posizione di arrivo NON dichiarata (regola sweep).
 
   - id: sotto_passaggio_esgrima
-    nome: Sotto il passaggio (esgrima persa)
+    nome: Sotto il passaggio
     ruolo: sotto
     svantaggio: true
     conquiste_possibili: [recupero_guardia]

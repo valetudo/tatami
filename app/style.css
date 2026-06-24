@@ -70,6 +70,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--testo);
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:12px;padding:3px 9px;border-radius:8px;background:rgba(255,255,255,.07);
   border:1px solid var(--panel-bordo);color:#cfe0f0}
+.rel{font-size:13px;line-height:1.45;padding:3px 0;color:#dbe6f1}
+.rel .muted2{color:var(--muto)}
 
 /* media */
 .media{margin:8px 0}
