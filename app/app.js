@@ -134,6 +134,10 @@ function etichetta3D(n){
     s.padding = 1.6;
     s.borderRadius = 2;
     s.position.set(0, 7, 0);
+    // sempre DAVANTI ai nodi: niente depth-test, disegnate per ultime
+    s.material.depthTest = false;
+    s.material.depthWrite = false;
+    s.renderOrder = 10;
     return s;
   }catch(e){ return null; }
 }
