@@ -230,6 +230,13 @@ function mostraNodo(n){
   if (n.svantaggio) b += tag('prigione', 'svantaggio');
   b += '</div>';
 
+  if (n.nomi && (n.nomi.sotto || n.nomi.sopra)){
+    b += `<div class="p-sez">Due facce · stessa posizione</div><div class="chips">`;
+    if (n.nomi.sotto) b += `<span class="chip">👁 da sotto: ${esc(n.nomi.sotto)}</span>`;
+    if (n.nomi.sopra) b += `<span class="chip">👁 da sopra: ${esc(n.nomi.sopra)}</span>`;
+    b += '</div>';
+  }
+
   if (n.conquiste_possibili && n.conquiste_possibili.length){
     b += `<div class="p-sez">Conquiste possibili qui</div><div class="chips">`
        + n.conquiste_possibili.map((c) => `<span class="chip">🔑 ${esc(c)}</span>`).join('') + '</div>';

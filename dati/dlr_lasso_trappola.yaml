@@ -13,18 +13,19 @@ posizioni:
       con la mia sinistra, suo bavero con la mia destra. Piede destro in appoggio sulla
       sua gamba sinistra.
 
+  # STESSA posizione vista dalle due facce: da sotto "mezza guardia, lui in piedi",
+  # da sopra "headquarters". Un nodo solo, due nomi-per-prospettiva.
   - id: mezza_guardia_lui_in_piedi
-    nome: Mezza guardia (lui in piedi)
+    nome: Mezza guardia ↔ Headquarters
     ruolo: sotto
+    nomi:
+      sotto: Mezza guardia (lui in piedi)
+      sopra: Headquarters (lui sopra)
     conquiste_possibili: [esgrima, underhook, sbilanciamento]
-    note: Lui toglie il mio piede destro e lo infila tra le sue gambe.
-
-  - id: headquarters
-    nome: Headquarters (lui sopra)
-    ruolo: sotto
     note: >
-      Lui in piedi sopra la mezza guardia. Bivio: knee slide sul suo lato sinistro o
-      smash pass sul suo lato destro. Il suo braccio destro tiene il mio bavero.
+      Stessa posizione, due facce. Da SOTTO: mezza guardia, lui in piedi (lui toglie il
+      mio piede destro e lo infila tra le sue gambe). Da SOPRA: headquarters, piattaforma
+      di passaggio (bivio knee slide / smash pass; il suo braccio destro tiene il mio bavero).
 
   - id: lasso_guard
     nome: Lasso guard (anti-HQ)
@@ -59,13 +60,9 @@ transizioni:
     se_lui: toglie il mio piede d'appoggio con la mano sinistra
 
   - da: mezza_guardia_lui_in_piedi
-    a: headquarters
-    mossa: lui sale in headquarters
-
-  - da: headquarters
     a: lasso_guard
     mossa: metto la lasso (gamba sinistra) sul suo braccio destro
-    note: previene sia knee slide sia smash
+    note: previene sia knee slide sia smash (lui e' "salito" in headquarters, stessa posizione)
 
   # conquista dell'esgrima: persistente, con condizione di mantenimento
   - da: mezza_guardia_lui_in_piedi

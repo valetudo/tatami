@@ -44,6 +44,9 @@ prospettiva_default: sotto      # sotto | sopra
 posizioni:
   - id: <slug>                  # OBBLIGATORIO, univoco
     nome: <nome mostrato>
+    nomi:                       # opz. — STESSA posizione, due nomi-per-prospettiva
+      sotto: <come la chiama chi sta sotto>
+      sopra: <come la chiama chi sta sopra>
     tipo: posizione             # posizione (default) | sottomissione | esito  (gli ultimi due TERMINALI)
     ruolo: sotto                # sotto | sopra (prospettiva di chi gioca il ramo)
     svantaggio: false           # true = "prigione" (nodo subìto ma vivo: difese/fughe)

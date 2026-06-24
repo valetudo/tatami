@@ -61,8 +61,17 @@ def carica_moduli():
         glob.glob(os.path.join(DATI, "*.yaml")) + glob.glob(os.path.join(DATI, "*.yml"))
     )
     for path in paths:
-        with open(path, encoding="utf-8") as f:
-            doc = yaml.safe_load(f) or {}
+        try:
+            with open(path, encoding="utf-8") as f:
+                doc = yaml.safe_load(f) or {}
+        except yaml.YAMLError as e:
+            mark = getattr(e, "problem_mark", None)
+            dove = f" (riga {mark.line + 1}, colonna {mark.column + 1})" if mark else ""
+            sys.stderr.write(f"ERRORE di sintassi YAML in {os.path.basename(path)}{dove}:\n")
+            sys.stderr.write(f"  {getattr(e, 'problem', e)}\n")
+            sys.stderr.write("  Spesso e' un \": \" (due punti + spazio) dentro un testo:\n")
+            sys.stderr.write("  metti quel valore tra \"virgolette\" e ricompila.\n")
+            sys.exit(1)
         doc["_file"] = os.path.basename(path)
         moduli.append(doc)
     return moduli, paths
@@ -96,10 +105,12 @@ def costruisci(moduli):
 
             nodi_modulo.setdefault(nid, set()).add(modulo)
 
+            nomi = raw.get("nomi") or None
             if nid not in nodi:
                 nodi[nid] = {
                     "id": nid,
-                    "nome": raw.get("nome", nid),
+                    "nome": raw.get("nome") or (nomi and (nomi.get("sopra") or nomi.get("sotto"))) or nid,
+                    "nomi": nomi,
                     "tipo": tipo,
                     "ruolo": ruolo,
                     "svantaggio": bool(raw.get("svantaggio", False)),
@@ -126,6 +137,8 @@ def costruisci(moduli):
                     n["note"] = raw["note"]
                 if not n["media"] and raw.get("media"):
                     n["media"] = raw["media"]
+                if not n.get("nomi") and nomi:
+                    n["nomi"] = nomi
 
         # ---- archi ----
         for raw in (doc.get("transizioni") or []):
