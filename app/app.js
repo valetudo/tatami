@@ -160,11 +160,18 @@ function costruisciGrafo(){
     .onNodeClick(mostraNodo)
     .onLinkClick(mostraArco)
     .onBackgroundClick(chiudiPannello)
-    .onEngineStop(() => { if (!adattato){ adattato = true; try{ G.zoomToFit(500, 60); }catch(e){} } });
+    .onEngineStop(() => { if (!adattato){ adattato = true; try{ G.zoomToFit(600, 40); }catch(e){} } });
 
   if (USA_ETICHETTE){
     G.nodeThreeObjectExtend(true).nodeThreeObject(etichetta3D);
   }
+
+  // piu' "aria" tra i nodi: con le etichette accese si legge molto meglio
+  try{
+    G.d3Force('charge').strength(-170);
+    if (G.d3Force('link')) G.d3Force('link').distance(80);
+    G.d3VelocityDecay(0.28);
+  }catch(e){}
 
   window.addEventListener('resize', () => { G.width(window.innerWidth); G.height(window.innerHeight); });
   G.width(window.innerWidth).height(window.innerHeight);
