@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>tatami — il gioco di Beppe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="graph"></div>
+
+  <!-- intestazione -->
+  <header id="testata" class="overlay">
+    <div class="titolo">🥋 tatami</div>
+    <div id="conta" class="conta">caricamento…</div>
+    <button id="avvisi-btn" class="badge nascosto" type="button">⚠ <span id="avvisi-n">0</span></button>
+  </header>
+
+  <!-- filtro moduli -->
+  <section id="filtro" class="overlay">
+    <div class="overlay-tit">Moduli</div>
+    <div id="filtro-lista"></div>
+  </section>
+
+  <!-- legenda -->
+  <section id="legenda" class="overlay">
+    <div class="overlay-tit">Legenda</div>
+    <ul class="leg">
+      <li><i class="dot" style="background:#4aa3df"></i> Posizione (sotto)</li>
+      <li><i class="dot" style="background:#2f6fb0"></i> Posizione (sopra)</li>
+      <li><i class="dot" style="background:#e8833a"></i> Svantaggio (prigione)</li>
+      <li><i class="dot" style="background:#2ecc71"></i> Esito (terminale)</li>
+      <li><i class="dot" style="background:#e74c3c"></i> Sottomissione (terminale)</li>
+      <li class="sep"></li>
+      <li><i class="bar" style="background:#7f8c9b"></i> mossa</li>
+      <li><i class="bar" style="background:#f5c518"></i> ottiene conquista</li>
+      <li><i class="bar" style="background:#9b59b6"></i> richiede conquista</li>
+      <li><i class="bar" style="background:#ff453a"></i> esito negativo</li>
+    </ul>
+  </section>
+
+  <!-- pannello dettaglio -->
+  <aside id="pannello" class="overlay nascosto">
+    <button id="chiudi" class="chiudi" type="button" aria-label="chiudi">✕</button>
+    <div id="pannello-corpo"></div>
+  </aside>
+
+  <!-- elenco avvisi (buchi) -->
+  <aside id="avvisi-box" class="overlay nascosto">
+    <button id="chiudi-avvisi" class="chiudi" type="button" aria-label="chiudi">✕</button>
+    <div class="overlay-tit">Avvisi / buchi del gioco</div>
+    <ul id="avvisi-lista" class="avvisi-lista"></ul>
+  </aside>
+
+  <div id="errore" class="errore nascosto"></div>
+
+  <!-- librerie: 3d-force-graph (obbligatoria) + three/spritetext (etichette, opzionali) -->
+  <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three-spritetext@1.8.2/dist/three-spritetext.min.js"></script>
+  <script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: build e deploy (GitHub Pages)
+
+# Ad ogni push su main: ricostruisce grafo.json dai .yaml e pubblica la cartella app/.
+# Cosi' Beppe modifica/aggiunge un modulo, fa push, e l'URL pubblico si aggiorna da solo.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: dipendenze build
+        run: pip install pyyaml
+      - name: valida e genera grafo.json
+        run: python build.py
+      - name: configura Pages (auto-abilita)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: carica la cartella app/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

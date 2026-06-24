@@ -1,0 +1,100 @@
+modulo: dlr_lasso_trappola
+descrizione: >
+  Da guardia De la Riva: recupero in lasso contro headquarters, spazzata-trappola
+  regalando il lato opposto. Incluso il ramo negativo della perdita dell'esgrima.
+prospettiva_default: sotto
+
+posizioni:
+  - id: dlr
+    nome: Guardia De la Riva
+    ruolo: sotto
+    note: >
+      Gancio DLR gamba sinistra dietro la sua gamba destra. Grip: sua manica sinistra
+      con la mia sinistra, suo bavero con la mia destra. Piede destro in appoggio sulla
+      sua gamba sinistra.
+
+  - id: mezza_guardia_lui_in_piedi
+    nome: Mezza guardia (lui in piedi)
+    ruolo: sotto
+    conquiste_possibili: [esgrima, underhook, sbilanciamento]
+    note: Lui toglie il mio piede destro e lo infila tra le sue gambe.
+
+  - id: headquarters
+    nome: Headquarters (lui sopra)
+    ruolo: sotto
+    note: >
+      Lui in piedi sopra la mezza guardia. Bivio: knee slide sul suo lato sinistro o
+      smash pass sul suo lato destro. Il suo braccio destro tiene il mio bavero.
+
+  - id: lasso_guard
+    nome: Lasso guard (anti-HQ)
+    ruolo: sotto
+    note: La mia gamba sinistra avvolge il suo braccio destro. Chiude il bivio.
+
+  - id: side_control_regalato
+    nome: Controllo laterale regalato (trappola)
+    ruolo: sotto
+    note: Concedo il passaggio dal lato opposto al lasso; il lasso resta armato.
+
+  - id: inversione
+    nome: Inversione avvenuta (+2)
+    tipo: esito
+    note: >
+      Ribaltamento riuscito dal lato del lasso. Obiettivo = relazione invertita
+      (sotto->sopra). Posizione di arrivo NON dichiarata (regola sweep).
+
+  - id: sotto_passaggio_esgrima
+    nome: Sotto il passaggio (esgrima persa)
+    ruolo: sotto
+    svantaggio: true
+    conquiste_possibili: [recupero_guardia]
+    note: >
+      Lui ha contro-esgrima e scende col busto orizzontale, spazio ermetico. Vantaggio
+      quasi irreversibile (il PERCHE' meccanico sta nel video). Gioco di difesa/fuga.
+
+transizioni:
+  - da: dlr
+    a: mezza_guardia_lui_in_piedi
+    mossa: lui smonta il DLR e mi infila il piede destro tra le sue gambe
+    se_lui: toglie il mio piede d'appoggio con la mano sinistra
+
+  - da: mezza_guardia_lui_in_piedi
+    a: headquarters
+    mossa: lui sale in headquarters
+
+  - da: headquarters
+    a: lasso_guard
+    mossa: metto la lasso (gamba sinistra) sul suo braccio destro
+    note: previene sia knee slide sia smash
+
+  # conquista dell'esgrima: persistente, con condizione di mantenimento
+  - da: mezza_guardia_lui_in_piedi
+    a: mezza_guardia_lui_in_piedi
+    mossa: stabilisco l'esgrima
+    conquista: esgrima
+    persiste: true
+    mantieni_se: "chiudo con testa o spalla lo spazio sotto l'ascella dal lato dell'esgrima"
+
+  - da: lasso_guard
+    a: side_control_regalato
+    mossa: tolgo il piede destro e agevolo il suo passaggio (trappola)
+    se_lui: prova a passare dal lato opposto al lasso
+
+  - da: side_control_regalato
+    a: inversione
+    mossa: apro il ginocchio del lasso e ribalto dal lato del lasso
+    se_lui: chiude la distanza e si abbassa per stabilizzare
+
+  # ramo negativo: perdo l'esgrima -> nodo di svantaggio (vivo)
+  - da: mezza_guardia_lui_in_piedi
+    a: sotto_passaggio_esgrima
+    mossa: non chiudo lo spazio sotto l'ascella, perdo l'esgrima
+    perdo_conquista: esgrima
+    esito_negativo: true
+    note: lui prende la contro-esgrima e scende orizzontale
+
+  # dal nodo di svantaggio riparte il gioco difensivo
+  - da: sotto_passaggio_esgrima
+    a: mezza_guardia_lui_in_piedi
+    mossa: ricostruisco il frame e provo a recuperare la guardia
+    se_lui: lascia un attimo di spazio

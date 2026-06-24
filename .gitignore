@@ -1,0 +1,9 @@
+# artefatti generati da build.py (si rigenerano: python build.py)
+/grafo.json
+/app/grafo.json
+
+# sistema
+Thumbs.db
+.DS_Store
+__pycache__/
+*.pyc
